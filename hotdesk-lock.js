@@ -20,17 +20,18 @@ import xapi from 'xapi';
 
 const config = {
   maxattempts: 3,
+  panelId: 'lockButton',
   button: {
     name: 'Lock Device',
     color: '#eb4034',
     icon: 'Power'
-  },
-  panelId: 'lockButton'
+  }
 }
 
 /*********************************************************
  * Create Panel and Subscribe to Status Changes and Events
 **********************************************************/
+
 
 createPanel();
 
@@ -77,8 +78,13 @@ function processTextInputResponse(event) {
       }
       break;
     case 'pin-code-setup':
-      pin = event.Text;
-      xapi.Command.Standby.Halfwake();
+      if(event.Text.length >= 4){
+        pin = event.Text;
+        xapi.Command.Standby.Halfwake();
+      } else {
+        xapi.Command.UserInterface.Message.Alert.Display(
+        { Duration: 8, Text: 'The PIN must be a minimum of 4-digits', Title: 'Invalid PIN' });
+      }
       break;
   }
 }
@@ -117,7 +123,7 @@ function askForPIN(setup = false) {
     InputType: 'PIN',
     Placeholder: setup ? 'Please set a new PIN' : 'Please Enter PIN',
     SubmitText: 'Submit',
-    Text: setup ? 'Please set a PIN before the device can be locked' : requestText,
+    Text: setup ? 'Please set a PIN before the device can be locked<br>minimum 4-digits' : requestText,
     Title: setup ? 'Create PIN' : 'Device Locked'
   });
 }
