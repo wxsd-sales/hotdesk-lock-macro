@@ -1,8 +1,7 @@
 # Hotdesk Lock Macro
 This is an example Webex Device macro which locks your device using a PIN code while in an active hotdesk session.
 
-![image](https://github.com/wxsd-sales/hotdesk-lock-macro/assets/21026209/7381599a-33ef-4086-b490-f8d1fb7e3889)
-
+![hotdesk-lock-macro](https://github.com/wxsd-sales/hotdesk-lock-macro/assets/21026209/d54efc6f-0030-4211-882a-02ad8ee23000)
 
 ## Overview
 
